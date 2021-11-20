@@ -26,20 +26,32 @@ pipeline{
 				echo "${env.GIT_BRANCH}"
 				sh "printenv"
 				sh 'date'
-				sh 'mvn -DskipTests=true clean install'
-				archiveArtifacts(allowEmptyArchive: true, artifacts: 'target/*.war')
+				//sh 'mvn -DskipTests=true clean install'
+				//archiveArtifacts(allowEmptyArchive: true, artifacts: 'target/*.war')
 			
 			}
 		
 		}
 
-		stage('commits'){
+		stage('check-tools'){
+
 			steps{
-				sh 'git'
-				// shortCommit = sh(returnStdout:true, script: "git log -n 1 --pretty=format:'%h'").trim();
-				// echo "$shortCommit"
+
+				echo 'version'
+				sh 'git --version'
+				sh 'mvn -version'
+				sh 'javac -version'
+				sh 'git log -n 1 --pretty'
+
 			}
 		}
+
+		// stage('commits'){
+		// 	steps{				
+		// 		shortCommit = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
+		// 		echo "$shortCommit"
+		// 	}
+		// }
 		
 	}
 
