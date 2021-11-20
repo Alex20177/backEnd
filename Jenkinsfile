@@ -34,9 +34,11 @@ pipeline{
 		}
 
 		stage('commits'){
-			sh 'git'
-			// shortCommit = sh(returnStdout:true, script: "git log -n 1 --pretty=format:'%h'").trim();
-			// echo "$shortCommit"
+			steps{
+				sh 'git'
+				// shortCommit = sh(returnStdout:true, script: "git log -n 1 --pretty=format:'%h'").trim();
+				// echo "$shortCommit"
+			}
 		}
 		
 	}
